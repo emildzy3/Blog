@@ -12,6 +12,7 @@ from news.models import Category
 
 
 class CustomAccountManager(BaseUserManager):
+    use_in_migrations = True
     def create_user(self, email, full_name, password, **other_fields):
         if not email:
             raise ValueError('Введи почту')
