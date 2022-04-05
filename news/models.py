@@ -7,6 +7,7 @@ from django.conf import settings
 from django.urls import reverse, reverse_lazy
 
 
+
 class Post (models.Model):
     title = models.CharField(max_length=150, verbose_name='Заголовок')
     content = RichTextUploadingField(verbose_name='Текст новости')
