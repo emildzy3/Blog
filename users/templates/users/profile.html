@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title%} Профиль {%endblock%}
+{% block headline %} Ваш профиль {% endblock %}
+
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+    <div class="card text-center">
+      <div class="card-header">
+        <ul class="nav nav-pills card-header-pills">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'profile' %}">Профиль</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile_update' %}">Изменить</a>
+          </li>
+
+        </ul>
+      </div>
+      <div class="card-body">
+        {% if user.photo %}
+        <img src="{{ user.photo.url}}" class="rounded mx-auto d-block" alt="..." width="200" height="255">
+
+        {% else %}
+        <img src="https://dummyimage.com/600x400/000/1320d4.png&text=Заглушка  " class="card-img-top" alt="..." width="200" height="255">
+        {% endif%}
+        <h5 class="card-title">Имя: {{ user.full_name }}</h5>
+        <h5 class="card-title">Почта: {{ user.email }}</h5>
+        {% if user.is_author %}
+        <h6 class="card-subtitle mb-2 text-muted">Категория: {{ user.profileauthor.category }}</h6>
+        <p class="card-text">О себе: {{ user.profileauthor.bio|safe }} </p>
+          <p class="card-text">Достижения: {{ user.profileauthor.achivment|safe }} </p>
+        <a href="{{ user.get_absolute_url }}" class="btn btn-primary">Мои записи</a>
+         {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+{% endblock %}

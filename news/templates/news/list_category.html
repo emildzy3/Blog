@@ -1,0 +1,28 @@
+
+
+{% load mptt_tags %}
+
+<div class="iocn-link">
+  <a href="#">
+    <i class='bx bx-collection' ></i>
+    <span class="link_name">Категории </span>
+  </a>
+  <i class='bx bxs-chevron-down arrow' ></i>
+</div>
+<ul class="sub-menu">
+  <li><a class="link_name" href="#">Категории</a></li>
+
+  {% recursetree number_posts_category %}
+    <li>
+      <a href="{{ node.get_absolute_url }}">
+      {{ node.title }} -
+        {{node.number}}
+      {% if not node.is_leaf_node %}
+          <ul class="children">
+              {{ children }}
+          </ul>
+      {% endif %}
+    </a>
+  </li>
+  {% endrecursetree %}
+</ul>

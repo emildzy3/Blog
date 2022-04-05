@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+
+{% load crispy_forms_tags %}
+
+{% block title%} Регистрация автора {%endblock%}
+{% block headline %} Регистрация автора {% endblock %}
+
+{% block registration %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <p class="text-center"> Ниже представлена форма для подачи заявки на авторство сайта. В случае положительного принятия рещения администратором сайта о включении вас в список авторов, Вам будет отправлен логин и пароль с доступом к аккаунту </p>
+      <br>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <form action="{% url 'apply_for_registration' %}" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" >Отправить заявку</button>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

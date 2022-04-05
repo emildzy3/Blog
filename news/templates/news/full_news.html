@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+<style>
+  @media screen and (min-width: 600px) {
+    .children form {
+      margin-left: -48px;
+      /* will touch very left side */
+    }
+
+    .children .children form {
+      margin-left: -96px;
+      /* will touch very left side */
+    }
+  }
+</style>
+
+
+{% load crispy_forms_tags %}
+
+
+{% block title%} Новостной блоге {%endblock%}
+
+{% block headline %} {{ selected_post.title }} {% endblock %}
+
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+
+    <div class="card" style="width: 100%;">
+      {% if selected_post.preview_photo %}
+      <img width="200px" height="249px" src="{{ selected_post.preview_photo.url }}" class="card-img-top" alt="...">
+      {% else %}
+      <img src="https://dummyimage.com/300x100/000/1320d4.png&text=Заглушка  " class="card-img-top" alt="...">
+
+      {% endif%}
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Категория:<a href="{{ selected_post.category.get_absolute_url }}">{{ selected_post.category }}</a></h6>
+        <h5 class="card-title">{{selected_post.title}}</h5>
+        <p class="card-text">{{ selected_post.content|safe }}</p>
+        <p class="card-text"><small class="text-muted">Последние изменения: {{selected_post.date_change}}</small></p>
+        <p class="card-text"><small class="text-muted">Автор: <a href="{{ selected_post.author.get_absolute_url }}">{{selected_post.author}}</a></small></p>
+        <a href="{% url 'home' %}" class="btn btn-primary">На главную</a>
+        {% if user == selected_post.author %}
+        <a href="{{ selected_post.get_update_url }}" class="btn btn-primary">Редактировать запись</a>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <a href="{{selected_post.get_delete_url }}" type="button" class="btn btn-outline-danger">Удалить запись?</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block comments %}
+<div class="container">
+  <div class="row justify-content-center">
+
+    <div class="col-4">
+      <form action="{{selected_post.get_absolute_url}}" method="post">
+
+        {% csrf_token %}
+        {{ form.comment_text|as_crispy_field }}
+
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" value="Submit">Оставить комментарий</button>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row justify-content-md-center pt-5">
+
+    <div class="col-md-12">
+
+      {% load mptt_tags %}
+      <div>
+        {% recursetree comments %}
+
+        <div class="ms-2 p-4" style="border: 1px solid grey">
+          <div class="d-flex justify-content-between">Пользователь: {{ node.user }}
+            <div></div>{{ node.publication_date }}
+          </div>
+
+          <div id="{{ node.id }}">{{ node.comment_text }}</div>
+          <hr />
+
+          {% if node.level < 3 %}
+          <button class="button" onclick="myFunction({{ node.id }})">Ответить</button>
+          {% endif %}
+        </div>
+
+        {% if not node.is_leaf_node %}
+        <div class="children pl-3 ms-5">
+
+          <div class="d-flex justify-content-between">Ответ пользователю: {{ node.user }} </div>
+
+          {{ children }}
+        </div>
+        {% endif %}
+        {% endrecursetree %}
+      </div>
+    </div>
+
+    <script>
+      function formExit() {
+        document.getElementById("newForm").remove();
+      }
+
+      function myFunction(id) {
+        if (document.contains(document.getElementById("newForm"))) {
+          document.getElementById("newForm").remove();
+        }
+
+        var d1 = document.getElementById(id);
+        d1.insertAdjacentHTML('afterend',
+        '<form id="newForm" class="form-insert py-2" method="post"> \
+             <div class="d-flex justify-content-between"><h2>Ваш комментарий:</h2><div><button type="button" class="btn btn-outline-secondary" onclick="formExit()"">Закрыть</button></div></div> \
+             <select name="parent" class="d-none" id="id_parent"> \
+             <option value="' + id + '" selected="' + id + '"></option> \
+             </select> \
+             <textarea name="comment_text" cols="40" rows="5" class="form-control" required id="id_comment_text"></textarea> \
+             {% csrf_token %} \
+             <button type="submit" class="btn btn-primary btn-lg btn-block">Ответить</button> \
+           </form>');
+
+          document.querySelector('#id_parentt [value="' + id + '"]').selected = true;
+        }
+
+        $('#myForm').trigger("reset");
+    </script>
+    
+    {% endblock %}

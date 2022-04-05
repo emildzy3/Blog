@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title%} Зарегестрировать нового автора {%endblock%}
+{% block headline %} Зарегестрировать нового автора {% endblock %}
+
+
+{% block content %}
+
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <form action="{% url 'registration_for_author' %}" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" value="Submit">Зарегестрировать автора</button>
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

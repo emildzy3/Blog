@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+
+    {% for authors in authors %}
+    <div class="card" style="width: 25rem;">
+      {% if authors.photo %}
+      <img width="200px" height="249px" src="{{ authors.photo.url }}" class="card-img-top" alt="...">
+      {% else %}
+      <img src="https://dummyimage.com/600x400/000/1320d4.png&text=Заглушка  " class="card-img-top" alt="...">
+
+      {% endif%}
+      <div class="card-body">
+        <h5 class="card-title"> Имя:{{ authors.full_name }} </h5>
+        <p class="card-text"> О себе: {{ authors.profileauthor.bio|truncatechars:50|safe }}</p>
+        <p class="card-text"><small class="text-muted">Любимая категория: {{ authors.profileauthor.category }} </small></p>
+        <p class="card-text"> Постов - {{ authors.number}}</p>
+
+        <a href="{{ authors.get_profile_url }}" class="btn btn-primary">Полный профиль</a>
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title%} Регистрация читателя {%endblock%}
+{% block headline %} Регистрация читателя {% endblock %}
+
+
+{% block registration %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-{{ message.tags }} text-center" {% endif %} role="alert">
+  {{ message }}!
+  {% endfor %}
+</div>
+{% endif %}
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <form action="{% url 'registration' %}" method="post">
+
+        <a type="button" class="btn btn-link" href="{% url 'apply_for_registration'%}"> Зарегистрироваться как автор </a>
+
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" value="Submit">Зарегестрироваться</button>
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

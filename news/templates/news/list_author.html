@@ -1,0 +1,4 @@
+
+{% for author in number_author_category %}
+  <li><a href="{{ author.get_absolute_url }}"> {{ author.full_name }} - <span class="badge bg-info text-dark"> {{ author.number }} </span></a></li>
+{% endfor %}

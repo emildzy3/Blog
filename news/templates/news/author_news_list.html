@@ -1,0 +1,33 @@
+{% extends "base_news.html" %}
+
+{% block title%} Новостной блоге {%endblock%}
+
+{% block headline %} Автор: {{ name_author }} {% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    
+{% for post in page_obj %}
+    <div class="card" style="width: 25rem;">
+      {% if post.preview_photo %}
+        <img width="200px" height="249px" src="{{ post.preview_photo.url }}" class="card-img-top" alt="...">
+      {% else %}
+        <img src="https://dummyimage.com/600x400/000/1320d4.png&text=Заглушка  " class="card-img-top" alt="...">
+
+      {% endif%}
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Категория: {{ post.category }}</h6>
+        <h5 class="card-title">{{post.title}}</h5>
+        <p class="card-text">{{ post.content|truncatechars:50|safe }}</p>
+         <p class="card-text"><small class="text-muted">Последние изменения: {{post.date_change}}</small></p>
+         <p class="card-text"><small class="text-muted">Автор: {{post.author}}</small></p>
+        <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать далее</a>
+      </div>
+    </div>
+{% endfor %}
+  </div>
+</div>
+
+{% endblock %}

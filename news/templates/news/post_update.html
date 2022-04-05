@@ -1,0 +1,29 @@
+{% extends "base_news.html" %}
+{% load crispy_forms_tags %}
+
+{% block title%} Изменить новость {%endblock%}
+
+{% block headline %} Изменить новость {% endblock %}
+
+{% block content %}
+
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <form action="{{ post.get_update_url }}" method="post" enctype="multipart/form-data" >
+
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" value="Submit"> Добавить новость </button>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

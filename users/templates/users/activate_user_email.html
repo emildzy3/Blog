@@ -1,0 +1,18 @@
+{% autoescape off %}
+
+
+Ссылка для активации аккаунта:
+
+
+{% block reset_link %}
+{{ protocol }}://{{ domain }}{% url 'activation' uidb64=uid token=token %}
+{% endblock %}
+
+Ваш логин: {{ reader.get_username }}
+Имя пользователя: {{ reader.full_name }}
+
+
+
+Команда {{ site_name }}
+
+{% endautoescape %}

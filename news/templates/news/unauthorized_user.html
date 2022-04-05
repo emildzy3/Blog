@@ -1,0 +1,23 @@
+{% extends "base_news.html" %}
+{% load news_extras %}
+
+
+
+{% block about_site %}
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <p class="fs-2 text-warning"> После прохождения регистрации вы сможете просматривать посты авторов нашего блога. Изучить авторов вы можете наже. Если вы уже зарегестрированы, пожалуйста, авторизуйтесь. Если у вас нет аккаунта пройдите
+        процедуру регистрации.</p>
+
+      <a href="{% url 'registration' %}" type="button" class="btn btn-outline-primary">Регистрация</a>
+      <a href="{% url 'authorization' %}" type="button" class="btn btn-outline-secondary">Вход</a>
+
+
+    </div>
+  </div>
+</div>
+<br>
+{% author_full_list %}
+{% endblock %}

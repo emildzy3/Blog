@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title%} Авторизация пользователя {%endblock%}
+{% block headline %} Авторизация пользователя {% endblock %}
+
+
+{% block authorization %}
+
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <form action="{% url 'authorization' %}" method="post">
+
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" value="Submit">Войти</button>
+
+      </form>
+      <a href="{% url 'password_reset' %}"> Забыли пароль? </a> <br>
+      <a href="{% url 'registration' %}"> Регистрация </a> <br>
+      <a href="{% url 'home' %}"> На главнную </a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base_news.html" %}
+{% load crispy_forms_tags %}
+
+{% block title%} Удаление {%endblock%}
+
+{% block headline %} Удалить новость {% endblock %}
+
+{% block content %}
+
+div class="container">
+<div class="row">
+  <div class="card" style="width: 100%;">
+    <div class="card-body">
+      <form action="{{ post.get_delete_url }}" method="post">
+        {% csrf_token %}
+        <h5 class="card-title text-center">Вы уверены что хотите удалть новость "{{ post.title }}" ?</h5> <br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <a href="{{ post.get_absolute_url }}" class="btn btn-primary" type="button">Вернуться назад</a>
+          <button href="{{ post.get_delete_url}}" class="btn btn-outline-danger" type="submit">Удалить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+{% endblock%}

@@ -1,0 +1,17 @@
+{% extends "base_news.html" %}
+{% load crispy_forms_tags %}
+{% load news_extras %}
+
+{% block title%} Авторы блога  {%endblock%}
+
+{% block headline %} Авторы блога {% endblock %}
+
+
+{% load static %}
+{% load news_extras %}
+
+{% block content %}
+
+{% author_full_list %}
+
+{% endblock %}

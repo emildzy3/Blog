@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title%} Новостной блоге {%endblock%}
+
+{% block headline %} Записи блога {% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+  <div class="row">
+
+    <form class="d-flex" action="{% url 'home' %}" method="get">
+      <input class="form-control me-2 mb-4" type="search" placeholder="Введите заголовок, категорию или фрагмент записи" aria-label="Search" name='search'>
+      <button class="btn btn-outline-success" type="submit">Поиск</button>
+    </form>
+
+    {% for post in page_obj %}
+    <div class="card" style="width: 25rem;">
+      {% if post.preview_photo %}
+      <img width="200px" height="249px" src="{{ post.preview_photo.url }}" class="card-img-top" alt="...">
+      {% else %}
+      <img src="https://dummyimage.com/600x400/000/1320d4.png&text=Заглушка  " class="card-img-top" alt="...">
+
+      {% endif%}
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Категория:<a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></h6>
+        <h5 class="card-title">{{post.title}}</h5>
+        <p class="card-text">{{ post.content|truncatechars:50|safe }}</p>
+        <p class="card-text"><small class="text-muted">Дата публикации: {{post.date_creation|date:"D d M Y "}}, {{post.date_creation|time:"H:i"}}</small></p>
+        <p class="card-text"><small class="text-muted">Автор: <a href="{{ post.author.get_absolute_url }}">{{post.author}}</a> </small></p>
+        <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать далее</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+{% block pagination %}
+
+{% if paginator.num_pages > 1 %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+
+    {% if page_obj.number %}
+    <li class="page-item">
+      <a class="page-link" href="?page=1" aria-label="Previous">
+        <span aria-hidden="true">В начало </span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% for i in paginator.page_range %}
+
+      {% if page_obj.number == i %}
+        <li class="page-item active"><a class="page-link" href="?page={{ i }}"> {{ i }} </a></li>
+      {% elif i >= page_obj.number|add:-2 and i <= page_obj.number|add:2  %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}"> {{ i }} </a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Next">
+        <span aria-hidden="true">В конец </span>
+      </a>
+    </li>
+    {% endif %}
+
+  </ul>
+</nav>
+{% endif %}
+{% endblock %}
