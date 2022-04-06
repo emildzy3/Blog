@@ -1,0 +1,40 @@
+
+Error: '/home/admin_prod/Blog/config/gunicorn.conf.py' doesn't exist
+
+Error: '/home/admin_prod/Blog/config/gunicorn.conf.py' doesn't exist
+
+Error: '/home/admin_prod/Blog/config/gunicorn.conf.py' doesn't exist
+
+Error: '/home/admin_prod/Blog/config/gunicorn.conf.py' doesn't exist
+Invalid value for user: prod_admin
+
+
+Error: No such user: 'prod_admin'
+Invalid value for user: prod_admin
+
+
+Error: No such user: 'prod_admin'
+Invalid value for user: prod_admin
+
+
+Error: No such user: 'prod_admin'
+Invalid value for user: prod_admin
+
+
+Error: No such user: 'prod_admin'
+[2022-04-06 09:18:27 +0000] [1278] [INFO] Starting gunicorn 20.1.0
+[2022-04-06 09:18:27 +0000] [1278] [INFO] Listening at: http://10.128.0.29:8000 (1278)
+[2022-04-06 09:18:27 +0000] [1278] [INFO] Using worker: sync
+[2022-04-06 09:18:27 +0000] [1281] [INFO] Booting worker with pid: 1281
+[2022-04-06 09:18:27 +0000] [1282] [INFO] Booting worker with pid: 1282
+Internal Server Error: /account/profile/update/
+Traceback (most recent call last):
+  File "/home/admin_prod/venv/lib/python3.7/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/admin_prod/venv/lib/python3.7/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/admin_prod/Blog/users/views.py", line 99, in profile_update
+    if request.user.is_author:
+  File "/home/admin_prod/venv/lib/python3.7/site-packages/django/utils/functional.py", line 247, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'AnonymousUser' object has no attribute 'is_author'
