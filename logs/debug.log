@@ -38,3 +38,174 @@ Traceback (most recent call last):
   File "/home/admin_prod/venv/lib/python3.7/site-packages/django/utils/functional.py", line 247, in inner
     return func(self._wrapped, *args)
 AttributeError: 'AnonymousUser' object has no attribute 'is_author'
+[2022-04-07 17:34:24 +0000] [29357] [INFO] Starting gunicorn 20.1.0
+[2022-04-07 17:34:24 +0000] [29357] [INFO] Listening at: http://10.128.0.29:8000 (29357)
+[2022-04-07 17:34:24 +0000] [29357] [INFO] Using worker: sync
+[2022-04-07 17:34:24 +0000] [29359] [INFO] Booting worker with pid: 29359
+[2022-04-07 17:34:24 +0000] [29360] [INFO] Booting worker with pid: 29360
+Not Found: /media/AuthorUser_photo/2022/04/07/Для_кворка_обложка_2_Монтажная_область_1.jpg
+Not Found: /media/AuthorUser_photo/2022/04/07/Для_кворка_обложка_2_Монтажная_область_1.jpg
+Not Found: /media/AuthorUser_photo/2022/04/07/Для_кворка_обложка_2_Монтажная_область_1.jpg
+Not Found: /media/AuthorUser_photo/2022/04/07/Для_кворка_обложка_2_Монтажная_область_1.jpg
+Not Found: /media/AuthorUser_photo/2022/04/07/Для_кворка_обложка_2_Монтажная_область_1.jpg
+Not Found: /media/AuthorUser_photo/2022/04/07/Для_кворка_обложка_2_Монтажная_область_1.jpg
+Internal Server Error: /account/profile/update/
+Traceback (most recent call last):
+  File "/home/admin_prod/Blog/users/views.py", line 58, in edit_author_profile
+    profile_author = ProfileAuthor.objects.get(author=request.user.id)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/query.py", line 496, in get
+    raise self.model.DoesNotExist(
+users.models.ProfileAuthor.DoesNotExist: ProfileAuthor matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.ForeignKeyViolation: insert or update on table "users_profileauthor" violates foreign key constraint "users_profileauthor_category_id_b5d5c09b_fk_news_category_id"
+DETAIL:  Key (category_id)=(1) is not present in table "news_category".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/admin_prod/Blog/users/views.py", line 100, in profile_update
+    return edit_author_profile(request)
+  File "/home/admin_prod/Blog/users/views.py", line 60, in edit_author_profile
+    ProfileAuthor.objects.create(author=request.user)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/query.py", line 514, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/base.py", line 806, in save
+    self.save_base(
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/base.py", line 857, in save_base
+    updated = self._save_table(
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/base.py", line 1000, in _save_table
+    results = self._do_insert(
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/base.py", line 1041, in _do_insert
+    return manager._insert(
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/query.py", line 1434, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1621, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.IntegrityError: insert or update on table "users_profileauthor" violates foreign key constraint "users_profileauthor_category_id_b5d5c09b_fk_news_category_id"
+DETAIL:  Key (category_id)=(1) is not present in table "news_category".
+
+Not Found: /media/AuthorUser_photo/2022/04/07/Для_кворка_обложка_2_Монтажная_область_1.jpg
+Invalid HTTP_HOST header: 'priv'. You may need to add 'priv' to ALLOWED_HOSTS.
+Bad Request: /
+Invalid HTTP_HOST header: 'priv'. You may need to add 'priv' to ALLOWED_HOSTS.
+Bad Request: /
+Not Found: /aadmin
+Internal Server Error: /account/profile/update/
+Traceback (most recent call last):
+  File "/home/admin_prod/Blog/users/views.py", line 58, in edit_author_profile
+    profile_author = ProfileAuthor.objects.get(author=request.user.id)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/query.py", line 496, in get
+    raise self.model.DoesNotExist(
+users.models.ProfileAuthor.DoesNotExist: ProfileAuthor matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.ForeignKeyViolation: insert or update on table "users_profileauthor" violates foreign key constraint "users_profileauthor_category_id_b5d5c09b_fk_news_category_id"
+DETAIL:  Key (category_id)=(1) is not present in table "news_category".
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/admin_prod/Blog/users/views.py", line 100, in profile_update
+    return edit_author_profile(request)
+  File "/home/admin_prod/Blog/users/views.py", line 60, in edit_author_profile
+    ProfileAuthor.objects.create(author=request.user)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/query.py", line 514, in create
+    obj.save(force_insert=True, using=self.db)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/base.py", line 806, in save
+    self.save_base(
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/base.py", line 857, in save_base
+    updated = self._save_table(
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/base.py", line 1000, in _save_table
+    results = self._do_insert(
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/base.py", line 1041, in _do_insert
+    return manager._insert(
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/query.py", line 1434, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/models/sql/compiler.py", line 1621, in execute_sql
+    cursor.execute(sql, params)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 103, in execute
+    return super().execute(sql, params)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/home/admin_prod/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.IntegrityError: insert or update on table "users_profileauthor" violates foreign key constraint "users_profileauthor_category_id_b5d5c09b_fk_news_category_id"
+DETAIL:  Key (category_id)=(1) is not present in table "news_category".
+
+Not Found: /HNAP1/
+Not Found: /.env
+Forbidden (CSRF cookie not set.): /
+Not Found: /HNAP1/
+[2022-04-07 22:47:13 +0000] [29357] [CRITICAL] WORKER TIMEOUT (pid:29360)
+[2022-04-07 22:47:13 +0000] [29360] [INFO] Worker exiting (pid: 29360)
+[2022-04-07 22:47:13 +0000] [31155] [INFO] Booting worker with pid: 31155
+Not Found: /HNAP1/
+Not Found: /boaform/admin/formLogin
+Not Found: /test6956.php
+Not Found: /HNAP1/
+Not Found: /robots.txt
+Not Found: /boaform/admin/formLogin
+Not Found: /login
+Not Found: /login
+Not Found: /login
+Not Found: /login
+Not Found: /login
+[2022-04-08 07:06:05 +0000] [29357] [INFO] Handling signal: term
+[2022-04-08 07:06:05 +0000] [29359] [INFO] Worker exiting (pid: 29359)
+[2022-04-08 07:06:05 +0000] [31155] [INFO] Worker exiting (pid: 31155)
+[2022-04-08 07:06:05 +0000] [29357] [INFO] Shutting down: Master
+[2022-04-08 07:06:11 +0000] [1893] [INFO] Starting gunicorn 20.1.0
+[2022-04-08 07:06:11 +0000] [1893] [INFO] Listening at: http://10.128.0.29:8000 (1893)
+[2022-04-08 07:06:11 +0000] [1893] [INFO] Using worker: sync
+[2022-04-08 07:06:11 +0000] [1895] [INFO] Booting worker with pid: 1895
+[2022-04-08 07:06:11 +0000] [1896] [INFO] Booting worker with pid: 1896
+Not Found: /*
