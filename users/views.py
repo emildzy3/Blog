@@ -1,5 +1,4 @@
 
-
 from django.shortcuts import render
 from .forms import CustomReaderCreationForm, AuthorizationUserForm, CustomAuthorCreationForm, AdvancedUpdateForm, BaseUpdateForm, CustomPasswordResetForm
 from .models import ProfileAuthor
@@ -33,7 +32,7 @@ def get_author_profile(request, pk):
 
 
 def get_profile(request):
-    return render(request, 'users/profile.html')
+    return render(request, 'users/profile.html', {'pk': request.user.pk})
 
 
 def write_data_profile(form_with_basic_data, form_with_advanced_data=None):
@@ -267,3 +266,17 @@ def authorizationUser(request):
 def logoutUser(request):
     logout(request)
     return redirect('authorization')
+
+
+def delete_profile(request, pk):
+    actual_user= User.objects.get(pk=request.user.id)
+    if actual_user == request.user:
+        if request.method == 'POST':
+            actual_user.delete()
+            messages.success(request, 'Аккаунт удален')
+            return redirect('home')
+        return render(request, 'users/account_delete_confirmation.html', {'pk' : request.user.id })
+
+    else:
+        messages.warning(request, 'Вы можете удалить только свой аккаунт')
+        return redirect('profile')

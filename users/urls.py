@@ -33,4 +33,7 @@ urlpatterns = [
     path('author_profile/<int:pk>/', views.get_author_profile,
          name='author_profile'),
 
+    path('profile_delete/<int:pk>/', views.delete_profile,
+         name='profile_delete'),
+
 ]

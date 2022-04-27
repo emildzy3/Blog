@@ -36,6 +36,8 @@
           <p class="card-text">Достижения: {{ user.profileauthor.achivment|safe }} </p>
         <a href="{{ user.get_absolute_url }}" class="btn btn-primary">Мои записи</a>
          {% endif %}
+        <a href="{% url 'profile_delete' pk %}" class="btn btn-danger">Удалить аккаунт</a>
+
       </div>
     </div>
   </div>

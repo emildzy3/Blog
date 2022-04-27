@@ -1,0 +1,30 @@
+{% extends "base_news.html" %}
+{% load crispy_forms_tags %}
+
+{% block title%} Удаление аккаунта {%endblock%}
+
+{% block headline %} Удалить аккаунт ? {% endblock %}
+
+{% block content %}
+
+<div class="container">
+<div class="row">
+  <div class="card" style="width: 100%;">
+    <div class="card-body">
+      <form action="{% url 'profile_delete' pk %}" method="post">
+        {% csrf_token %}
+        <h5 class="card-title text-center">Вы уверены что хотите удалить аккаунт ?</h5> <br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <a href="{% url 'author_profile' pk %}" class="btn btn-primary" type="button">Вернуться назад</a>
+          <button href="{% url 'profile_delete' pk %}" class="btn btn-outline-danger" type="submit">Удалить</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+{% endblock%}
