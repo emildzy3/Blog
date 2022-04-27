@@ -2,7 +2,7 @@
 
 Блог с возможностью читать и публиковать посты.
 
-В [Техническом задании на разработку](https://github.com/emildzy3/Blog) описана цель проекта, представленно  описание платформ, а также указан стек используемых технологий
+В [Техническом задании на разработку](https://github.com/emildzy3/Blog/blob/main/doc/blog_tz.md) описана цель проекта, представленно  описание платформ, а также указан стек используемых технологий
 ___
 
 ## Запуск проекта 
@@ -23,4 +23,27 @@ python3 -m venv venv && source venv/bin/activate
 ```
 pip install -r requirements.txt
 ```
-5. 
+5. При использовании postgresql
+```
+sudo -u postgres psql
+CREATE DATABASE DB;
+CREATE USER user WITH PASSWORD '111';
+ALTER ROLE user SET client_encoding TO 'utf8';
+ALTER ROLE user SET default_transaction_isolation TO 'read committed';
+ALTER ROLE user SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE DB TO user;
+ALTER DATABASE DB OWNER TO user;
+
+```
+6. Производим миграции 
+```
+python manage.py migrate 
+```
+7. Создаем суперпользователя 
+```
+python manage.py createsuperuser
+```
+
+
+
+
