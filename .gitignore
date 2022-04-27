@@ -13,4 +13,6 @@ django_cache/
 
 media/*
 
+.env
+
 
