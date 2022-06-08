@@ -3,7 +3,7 @@ __pycache__/
 */__pychache__/
 *.pyc
 .pyc
-.idea
+.idea/
 prod_settings.py
 local_settings.py
 logs/
