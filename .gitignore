@@ -3,10 +3,11 @@ __pycache__/
 */__pychache__/
 *.pyc
 .pyc
-
+.idea
 prod_settings.py
 local_settings.py
-
+logs/
+static/
 django_cache/
 
 **/migrations/**
